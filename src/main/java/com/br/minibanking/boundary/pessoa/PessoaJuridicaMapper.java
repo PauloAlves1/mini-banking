@@ -11,7 +11,7 @@ public class PessoaJuridicaMapper {
         DadosPessoaJuridica pj = null;
         DadosPessoa dadosPessoa = null;
         try{
-            dadosPessoa = DadosPessoa.builder().endereco(pessoa.getEndereco()).nome(pessoa.getNome()).telefones(pessoa.getTelefones()).build();
+            dadosPessoa = DadosPessoa.builder().endereco(pessoa.getEndereco()).nome(pessoa.getNome()).telefone(pessoa.getTelefone()).build();
             pj = DadosPessoaJuridica.builder().cnpj(pessoa.getDocumento()).dadosPessoa(dadosPessoa).contas(pessoa.getContas() == null? null : pessoa.getContas()).build();
         } catch (Exception e) {
             throw new RuntimeException(e);

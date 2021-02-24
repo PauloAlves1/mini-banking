@@ -9,21 +9,23 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-@Table(name="PESSOA")
+@Table(name="pessoa")
 public class PessoaData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nome;
 
-    @OneToOne(mappedBy="pessoa")
+    private String documento;
+
+    @OneToOne
     private EnderecoData endereco;
 
-    @OneToMany(mappedBy="pessoa")
-    private ContaData conta;
+    @OneToMany
+    @JoinColumn(name="pessoa_id")
+    private List<ContaData> conta;
 
-    @OneToMany(mappedBy="pessoa")
-    private List<TelefonesData> telefones;
+    private String telefone;
 }

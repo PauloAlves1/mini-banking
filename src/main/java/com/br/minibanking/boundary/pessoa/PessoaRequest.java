@@ -19,8 +19,8 @@ public class PessoaRequest {
     private String nome;
     @JsonProperty("endereco")
     private Endereco endereco;
-    @JsonProperty("telefones")
-    private List<String> telefones;
+    @JsonProperty("telefone")
+    private String telefone;
     @JsonProperty("contas")
     private List<Conta> contas;
     @JsonProperty("dados_adicionais")

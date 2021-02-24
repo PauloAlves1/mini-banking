@@ -8,12 +8,12 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name="ENDERECO")
+@Table(name="endereco")
 public class EnderecoData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String rua;
     private String numero;

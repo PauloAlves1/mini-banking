@@ -10,11 +10,11 @@ import java.time.LocalDate;
 @Data
 @Builder
 @Entity
-@Table(name="CONTA")
+@Table(name="conta")
 public class ContaData {
     @Id
     @GeneratedValue
-    private Integer numero;
+    private Long numero;
 
     private Double saldo;
 

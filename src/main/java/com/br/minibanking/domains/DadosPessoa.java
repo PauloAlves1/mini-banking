@@ -16,5 +16,5 @@ public class DadosPessoa {
 
     private Endereco endereco;
 
-    private List<String> telefones;
+    private String telefone;
 }
