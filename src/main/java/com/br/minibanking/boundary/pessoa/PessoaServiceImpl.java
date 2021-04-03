@@ -102,6 +102,7 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     public PessoaData buscarPorId(long id) {
+        logger.info("Buscando pessoa: {}", id);
         return pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pessoa não encontrada"));
     }
 
