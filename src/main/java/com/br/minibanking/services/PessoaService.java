@@ -1,11 +1,12 @@
 package com.br.minibanking.services;
 
-import com.br.minibanking.boundary.pessoa.PessoaRequest;
-import com.br.minibanking.domains.DadosPessoaFisica;
-import com.br.minibanking.domains.DadosPessoaJuridica;
+import com.br.minibanking.boundary.pessoa.dto.AlterarPessoaRequest;
+import com.br.minibanking.boundary.pessoa.dto.PessoaRequest;
+import com.br.minibanking.database.data.PessoaData;
 
 public interface PessoaService {
 
-    public void deletar(String documento);
-    public void alterar(String documento, PessoaRequest pessoa);
+    PessoaData criar(PessoaRequest pessoa);
+    void deletar(long id);
+    void alterar(AlterarPessoaRequest pessoa);
 }

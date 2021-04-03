@@ -1,20 +1,20 @@
-package com.br.minibanking.boundary.pessoa;
+package com.br.minibanking.boundary.pessoa.dto;
 
 import com.br.minibanking.domains.Conta;
 import com.br.minibanking.domains.Endereco;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @Data
-@NoArgsConstructor
-public class PessoaRequest {
+public class AlterarPessoaRequest {
 
+    @JsonProperty
+    private Long id;
     @JsonProperty("nome")
     private String nome;
     @JsonProperty("endereco")
