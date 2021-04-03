@@ -1,7 +1,9 @@
 package com.br.minibanking.database.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name="endereco")
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnderecoData {
 
     @Id
@@ -20,8 +24,8 @@ public class EnderecoData {
     private String complemento;
     private String cep;
 
-    @OneToOne
-    @JoinColumn(name="pessoa_id", nullable=false)
+    @OneToOne()
+    @JoinColumn(name="pessoa_id")
     private PessoaData pessoaData;
 
 

@@ -1,58 +1,58 @@
 package com.br.minibanking.boundary.pessoa;
 
-import com.br.minibanking.domains.DadosPessoaFisica;
-import com.br.minibanking.domains.DadosPessoaJuridica;
+import com.br.minibanking.boundary.pessoa.dto.AlterarPessoaRequest;
+import com.br.minibanking.boundary.pessoa.dto.PessoaRequest;
+import com.br.minibanking.database.data.PessoaData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mini-banking/")
 @ResponseBody
 public class PessoaController {
 
+    private static final Logger logger = LoggerFactory.getLogger(PessoaController.class);
+
     @Autowired
     PessoaServiceImpl pessoaService;
 
+
+    @GetMapping("pessoas")
+    public ResponseEntity<List<PessoaData>> listar() {
+        logger.info("Buscar lista de pessoas");
+        return ResponseEntity.ok(pessoaService.listarPessoas());
+    }
+
     @PostMapping("pessoas")
-    public ResponseEntity<?> criar(@RequestBody PessoaRequest pessoa){
-        try {
-            pessoaService.criar(pessoa);
-        } catch(Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<PessoaData> criar(@RequestBody PessoaRequest pessoa){
+        logger.info("Criar pessoa");
+        return new ResponseEntity<>(pessoaService.criar(pessoa), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("pessoas/{documento}")
-    public ResponseEntity<?> deletar(@PathVariable("documento") String documento){
-        try {
-            pessoaService.deletar(documento);
-        } catch(Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+    @DeleteMapping("pessoas/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable long id){
+        logger.info("Deletar pessoa");
+        pessoaService.deletar(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("pessoas/{documento}")
-    public ResponseEntity<?> alterar(@PathVariable("documento") String documento, PessoaRequest pessoa){
-        try {
-            pessoaService.alterar(documento, pessoa);
-        } catch(Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PatchMapping("pessoas")
+    public ResponseEntity<?> alterar(@RequestBody AlterarPessoaRequest pessoa){
+        logger.info("Alterar pessoa");
+        pessoaService.alterar(pessoa);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-
-//    @GetMapping("pessoas/{documento}")
-//    public ResponseEntity<?> consultar(@PathVariable("documento") String documento){
-//        try {
-//            pessoaService.
-//        } catch(Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @GetMapping("pessoas/{id}")
+    public ResponseEntity<PessoaData> buscarPorId(@PathVariable long id) {
+        logger.info("Buscar pessoa");
+        return new ResponseEntity<>(pessoaService.buscarPorId(id), HttpStatus.OK);
+    }
 }

@@ -1,7 +1,9 @@
 package com.br.minibanking.database.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name="pessoa")
+@AllArgsConstructor
+@NoArgsConstructor
 public class PessoaData {
 
     @Id
@@ -20,12 +24,14 @@ public class PessoaData {
 
     private String documento;
 
-    @OneToOne
+    private String tipoDocumento;
+
+    @OneToOne(cascade=CascadeType.PERSIST)
     private EnderecoData endereco;
 
-    @OneToMany
-    @JoinColumn(name="pessoa_id")
-    private List<ContaData> conta;
+    @OneToMany(cascade=CascadeType.PERSIST)
+    private List<ContaData> contas;
 
     private String telefone;
+
 }
